@@ -47,8 +47,7 @@ namespace ScriptingDemos
         private static void Run()
         {
             var code = File.ReadAllText(GetScriptTestFile("test1.csx"));
-
-            CSharpScript.RunAsync(code).GetAwaiter().GetResult();
+            CSharpScript.RunAsync(code, ScriptOptions.Default).GetAwaiter().GetResult();
         }
 
         private static void RunRepl()

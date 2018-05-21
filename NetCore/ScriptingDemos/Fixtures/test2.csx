@@ -1,4 +1,5 @@
-﻿int Square(int number) {
+﻿int Square(int number)
+{
     return number*number;
 }
 

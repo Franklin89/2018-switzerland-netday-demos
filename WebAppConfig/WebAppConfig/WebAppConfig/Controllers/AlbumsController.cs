@@ -6,13 +6,12 @@ using Microsoft.Extensions.Options;
 
 namespace WebAppConfig.Controllers
 {
-
     [Route("api/[controller]")]
     public class AlbumsController : Controller
     {
-        private IOptions<AlbumsConfiguration> _albumsConfiguration;
+        private IOptionsSnapshot<AlbumsConfiguration> _albumsConfiguration;
 
-        public AlbumsController(IOptions<AlbumsConfiguration> albumsConfiguration)
+        public AlbumsController(IOptionsSnapshot<AlbumsConfiguration> albumsConfiguration)
         {
             _albumsConfiguration = albumsConfiguration;
         }
@@ -27,9 +26,10 @@ namespace WebAppConfig.Controllers
 
 
         [HttpGet]
-        public IEnumerable<Album> Get()
+        public async Task<IEnumerable<Album>> Get()
         {
-            var filteredAlbums = _albums.Where(_albumsConfiguration.Value.VisibleAlbumsFilterExpression.Value);
+            var filter = await _albumsConfiguration.Value.GetVisibleAlbumsFilter();
+            var filteredAlbums = _albums.Where(filter);
             return filteredAlbums;
         }
     }

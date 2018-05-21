@@ -1,4 +1,4 @@
-# Changelog since 2018-04-20
+# Changelog since 2018-04-21
 ## omnisharp/omnisharp-roslyn
 This release brings in the following new functionalities: 
 * Fix potential null-ref in MSBuild discovery (submitted by DustinCampbell, https://api.github.com/repos/OmniSharp/omnisharp-roslyn/issues/1189)

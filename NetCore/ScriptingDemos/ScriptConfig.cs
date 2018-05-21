@@ -27,7 +27,7 @@ namespace ScriptingDemos
             var code = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, _scriptName));
             var opts = ScriptOptions.Default.
                 AddImports("System", "System.IO", "System.Linq", "System.Collections.Generic", typeof(TConfig).Namespace).
-                AddReferences(typeof(object).GetTypeInfo().Assembly, typeof(Enumerable).GetTypeInfo().Assembly, typeof(TConfig).GetTypeInfo().Assembly);
+                AddReferences(typeof(TConfig).GetTypeInfo().Assembly);
 
             var script = await CSharpScript.RunAsync(code, opts, config);
             return config;

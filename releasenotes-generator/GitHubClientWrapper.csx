@@ -1,4 +1,3 @@
-#! "netcoreapp2.0"
 #r "nuget:Octokit, 0.29.0"
 
 using Octokit;
@@ -10,7 +9,7 @@ public class GitHubClientWrapper
 
     public GitHubClientWrapper()
     {
-        var accessToken = System.Environment.GetEnvironmentVariable("GITHUBTOKEN");
+        var accessToken = Environment.GetEnvironmentVariable("GITHUBTOKEN");
 
         if (string.IsNullOrWhiteSpace(accessToken)) throw new Exception("Could not fetch the required access token to acces the GitHub repository.");
         

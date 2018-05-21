@@ -11,4 +11,3 @@ var message = new Message
 };
 
 Console.WriteLine(message.Text);
-
