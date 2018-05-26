@@ -50,19 +50,6 @@ namespace ScriptingDemos
             CSharpScript.RunAsync(code, ScriptOptions.Default).GetAwaiter().GetResult();
         }
 
-        private static void RunRepl()
-        {
-            ScriptState<object> scriptState = null;
-            while (true)
-            {
-                Console.Write("* ");
-                var input = Console.ReadLine();
-                scriptState = scriptState == null ?
-                    CSharpScript.RunAsync(input, ScriptOptions.Default.AddImports("System", "System.Console")).Result :
-                    scriptState.ContinueWithAsync(input).Result;
-            }
-        }
-
         private static void RunWithHost()
         {
             var code = File.ReadAllText(GetScriptTestFile("test2.csx"));
@@ -87,6 +74,19 @@ namespace ScriptingDemos
         private static string GetScriptTestFile(string filename)
         {
             return Path.Combine(AppContext.BaseDirectory, "Fixtures", filename);
+        }
+
+        private static void RunRepl()
+        {
+            ScriptState<object> scriptState = null;
+            while (true)
+            {
+                Console.Write("* ");
+                var input = Console.ReadLine();
+                scriptState = scriptState == null ?
+                    CSharpScript.RunAsync(input, ScriptOptions.Default.AddImports("System", "System.Console")).Result :
+                    scriptState.ContinueWithAsync(input).Result;
+            }
         }
     }
 }
