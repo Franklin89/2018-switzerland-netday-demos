@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace WebAppConfig
 {
@@ -17,11 +18,13 @@ namespace WebAppConfig
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+            services.AddSingleton<IPostConfigureOptions<AlbumsConfiguration>>(new AlbumsConfigurationSetup());
             services.Configure<AlbumsConfiguration>(Configuration.GetSection("Albums"));
+
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptionsMonitor<AlbumsConfiguration> albumsOptionsMonitor)
         {
             if (env.IsDevelopment())
             {

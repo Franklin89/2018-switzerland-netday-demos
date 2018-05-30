@@ -24,12 +24,10 @@ namespace WebAppConfig.Controllers
             new Album { Quantity = 200, Artist = "Within Temptation", Title = "Let Us Burn", Genre = "gothic rock" }
         };
 
-
         [HttpGet]
-        public async Task<IEnumerable<Album>> Get()
+        public IEnumerable<Album> Get()
         {
-            var filter = await _albumsConfiguration.Value.GetVisibleAlbumsFilter();
-            var filteredAlbums = _albums.Where(filter);
+            var filteredAlbums = _albums.Where(_albumsConfiguration.Value.VisibleAlbumsFilterLambda);
             return filteredAlbums;
         }
     }

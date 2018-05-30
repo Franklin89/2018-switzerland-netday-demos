@@ -55,7 +55,7 @@ namespace ScriptingDemos
             var code = File.ReadAllText(GetScriptTestFile("test2.csx"));
 
             var result = CSharpScript.EvaluateAsync<int>(code, 
-                globals: new ScriptHost { Number = 5 }).Result;
+                globals: new ScriptHost { Number = 5 }).GetAwaiter().GetResult();
 
             //result is now 25
             Console.WriteLine(result);
